@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home
+            cd /home 
             unzip django_project_code.zip
             python manage.py make migrations
             python manage.py migrate
