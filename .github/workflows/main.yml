@@ -24,18 +24,18 @@ jobs:
           pip install -r requirements.txt
       
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - name: SSH into EC2 instance and deploy
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: ${{ secrets.EC2_HOST }}
-  #         username: ${{ secrets.EC2_USERNAME }}
-  #         key: ${{ secrets.EC2_SSH_KEY }}
-  #         script: |
-  #           cd /home
-  #           unzip django_project_code.zip
-  #           python manage.py make migrations
-  #           python manage.py migrate
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: SSH into EC2 instance and deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home
+            unzip django_project_code.zip
+            python manage.py make migrations
+            python manage.py migrate
